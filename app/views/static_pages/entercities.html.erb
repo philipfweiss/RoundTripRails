@@ -68,7 +68,7 @@
             var cities = {
                 start : '',
                 dests : [],
-                startDate : addDays(new Date(),2)
+                startDate : addDays(new Date(),4)
             };
             var num = parseInt(($('#no-cities').text()));
             for(var i = 1; i<num+1; i+=1) {
@@ -82,7 +82,9 @@
                     if (citycodes.hasOwnProperty(obj)) {
                         if(city === (citycodes[obj].city) && country === citycodes[obj].country){
                             code = citycodes[obj].iata;
-                            cities.dests.push([code,days]);
+                            if(i!=1) {
+                                cities.dests.push([code,days]);
+                            }
                             found = true;
                             break;
                         }
@@ -98,10 +100,8 @@
 
                 }
             }
-            window.localStorage.setItem("cities", cities);
-            console.log((window.localStorage.getItem('cities')).first);
-//            window.location.href="/yourtrip";
-
+            window.localStorage.setItem("cities", JSON.stringify(cities));
+            window.location.replace("/yourtrip");
 
         })
     });

@@ -12,7 +12,7 @@ class StaticPagesController < ApplicationController
   end
 
   def yourtrip
-    flash.now[:success] = params[:passval]
+    flash.now[:success] = "Searching for your flights!"
 
   end
 

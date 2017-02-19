@@ -13,6 +13,7 @@ var computeBestRoute = function(json) {
      ********************************************************************************************/
 
     var addDays = function(date, days) {
+        console.log(date);
         date.setDate(date.getDate() + days);
         return date;
     };
@@ -54,7 +55,6 @@ var computeBestRoute = function(json) {
         var next_date = apiDate(addDays(dep_date, 2));
         dep_date = apiDate(dep_date);
 
-
         var url = 'https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey='+key+'&origin='+source+'&destination='+dest+'&departure_date='+dep_date+'--'+next_date+'&nonstop=false&number_of_results=' + num_results;
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.open( "GET", url, false ); // false for synchronous request
@@ -63,6 +63,9 @@ var computeBestRoute = function(json) {
 
         // Now that we have the JSON data, find the cheapest flight.
         var json = (JSON.parse(xmlHttp.responseText));
+        console.log(json);
+        console.log('!!!!!!!!!!!!!!!!');
+
         var results = json.results;
         var cheapest;
         var best_flight;
@@ -147,9 +150,3 @@ var computeBestRoute = function(json) {
 
 };
 
-//var path = computeBestRoute(jsonTest);
-//for(var i =0; i<path.flights.length; i++) {
-//    console.log(path.flights[1][3]);
-//    var arrive = apiDate(new Date(path.flights[i][3].itineraries[0].outbound.flights[0].arrives_at));
-//    console.log("Flight from " + path.flights[i][0] + " to " + path.flights[i][1] + ", arriving at " + arrive + " for a total of: $" + path.flights[i][2]);
-//}

@@ -1,4 +1,4 @@
-<div class="jumbotron">
+<div id="stuff" class="jumbotron">
 
 </div>
 
@@ -6,7 +6,47 @@
 
 <script>
     $(document).ready(function() {
-        console.log(window.localStorage.getItem("cities").start);
-//        var bestRoute = computeBestRoute(window.cities);
+        $(function() {
+            $('#flash').delay(500).fadeIn('normal', function() {
+                $(this).delay(2500).fadeOut();
+            });
+        });
+
+        var apiDate = function(date) {
+            var dd = date.getDate();
+            if(dd < 10) {
+                dd = '0'+dd;
+            }
+
+            var mm = date.getMonth() + 1;
+            if(mm < 10) {
+                mm = '0'+mm;
+            }
+
+            var y = date.getFullYear();
+            return y + '-' + mm + '-' + dd;
+        };
+
+
+        var addDays = function(date, days) {
+            date.setDate(date.getDate() + days);
+            return date;
+        };
+
+        var cities = JSON.parse(window.localStorage.getItem("cities"));
+        cities.startDate = new Date(cities.startDate);
+
+        console.log(cities);
+        var path = computeBestRoute(cities);
+
+        for(var i =0; i<path.flights.length; i++) {
+            console.log(path.flights[1][3]);
+            var arrive = apiDate(new Date(path.flights[i][3].itineraries[0].outbound.flights[0].arrives_at));
+            console.log("Flight from " + path.flights[i][0] + " to " + path.flights[i][1] + ", arriving at " + arrive + " for a total of: $" + path.flights[i][2]);
+        }
+
+        $(stuff).text(JSON.stringify(path));
+
+
     });
 </script>
