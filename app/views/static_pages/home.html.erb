@@ -46,5 +46,13 @@
                 window.location.replace("/cities/" + val);
             }
         })
+
+        $("input").keypress(function(event) {
+            if (event.which == 13) {
+                event.preventDefault();
+                $('#go-button').click();
+            }
+        });
+
     })
 </script>
