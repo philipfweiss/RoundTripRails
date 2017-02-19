@@ -45,7 +45,7 @@
             </label>
             <select id="start-date" style="margin-bottom: 14px;" class="form-control">
                 <% 50.times do |x|%>
-                <option><%= (DateTime.now + x.days).strftime('%a %d %b %Y') %></option>
+                <option value="<%= (Time.now + (x+1).days).to_f %>"><%= (DateTime.now + (x+1).days).strftime('%a %d %b %Y') %></option>
                 <% end %>
             </select>
 
@@ -65,10 +65,11 @@
 
     $(document).ready(function() {
         $('#go-button').on('click', function() {
+            var startTime = ($('#start-date').val());
             var cities = {
                 start : '',
                 dests : [],
-                startDate : addDays(new Date(),4)
+                startDate : parseInt(startTime)*1000
             };
             var num = parseInt(($('#no-cities').text()));
             for(var i = 1; i<num+1; i+=1) {

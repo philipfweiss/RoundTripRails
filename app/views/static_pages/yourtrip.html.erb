@@ -1,4 +1,7 @@
-<div id="stuff" class="jumbotron">
+<div id="info" class="jumbotron">
+
+</div>
+<div id="check" class="jumbotron">
 
 </div>
 
@@ -36,16 +39,31 @@
         var cities = JSON.parse(window.localStorage.getItem("cities"));
         cities.startDate = new Date(cities.startDate);
 
-        console.log(cities);
         var path = computeBestRoute(cities);
 
-        for(var i =0; i<path.flights.length; i++) {
-            console.log(path.flights[1][3]);
-            var arrive = apiDate(new Date(path.flights[i][3].itineraries[0].outbound.flights[0].arrives_at));
-            console.log("Flight from " + path.flights[i][0] + " to " + path.flights[i][1] + ", arriving at " + arrive + " for a total of: $" + path.flights[i][2]);
-        }
+        var price = 0;
+        var html = '';
 
-        $(stuff).text(JSON.stringify(path));
+        for(var i =0; i<path.flights.length; i++) {
+            var flight_number = JSON.stringify(path.flights[i][3].itineraries[0].outbound.flights[0].flight_number);
+            var operating_airline = JSON.stringify(path.flights[i][3].itineraries[0].outbound.flights[0].operating_airline);
+            var arrive = (new Date(path.flights[i][3].itineraries[0].outbound.flights[0].arrives_at));
+            html+= '<div style="font-size: 18px; padding: -5px;" class="jumbotron g1'+'">';
+            html += "<div>Flight #"+(i+1)+" is from <b>" + path.flights[i][0] + "</b> to <b>" + path.flights[i][1] + "</b>. It arrives " + arrive + " and costs a total of: $" + (path.flights[i][2])+'</div>';
+            html += '<b>Flight Number: </b>' + flight_number ;
+            html += '<b>Airline: </b>' + operating_airline;
+            html+='</div>';
+            price += (parseInt(path.flights[i][2]));
+        }
+        html+= '<div style="font-size: 25px;" class="jumbotron g6'+'">';
+        html += 'The total cost of your trip is: <b>$' + price +'</b>';
+        html+='</div>'
+
+
+
+
+        $('#info').html('<div>'+html+'</div>');
+
 
 
     });
