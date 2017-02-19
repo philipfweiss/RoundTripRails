@@ -1,9 +1,9 @@
 <div id="info" class="jumbotron">
 
 </div>
-<div id="check" class="jumbotron">
+<!--<div id="check" class="jumbotron">-->
 
-</div>
+<!--</div>-->
 
 <%= javascript_include_tag "TripPlanner" %>
 
@@ -53,7 +53,7 @@
             html += '<b>Flight Number: </b>' + flight_number ;
             html += '<b>Airline: </b>' + operating_airline;
             html+='</div>';
-            price += (parseInt(path.flights[i][2]));
+            price += (parseFloat(path.flights[i][2]));
         }
         html+= '<div style="font-size: 25px;" class="jumbotron g6'+'">';
         html += 'The total cost of your trip is: <b>$' + price +'</b>';
@@ -64,6 +64,7 @@
 
         $('#info').html('<div>'+html+'</div>');
 
+//        $('#check').html('<div>'+JSON.stringify(path)+'</div>');
 
 
     });
