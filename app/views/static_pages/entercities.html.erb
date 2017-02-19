@@ -90,7 +90,6 @@
                     }
                 }
                 if(!found) {
-                    console.log(cities.dests);
                     alert("Please re-enter your city names");
                     return;
                 } else {
@@ -100,8 +99,11 @@
 
                 }
             }
-            window.cities = cities;
-            console.log(window.cities);
+            window.localStorage.setItem("cities", cities);
+            console.log((window.localStorage.getItem('cities')).first);
+//            window.location.href="/yourtrip";
+
+
         })
     });
 </script>

@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new'
   get 'index' => 'users'
   get 'cities/:id' => 'static_pages#entercities'
+  get 'yourtrip' => 'static_pages#yourtrip'
+  match 'yourtrip' => 'static_pages#youtrip', :via => :post
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 

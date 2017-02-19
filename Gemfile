@@ -9,6 +9,7 @@ gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'will_paginate'
+gem 'responders'
 gem 'bootstrap-will_paginate'
 gem 'jbuilder'
 gem 'web-console', group: :development
