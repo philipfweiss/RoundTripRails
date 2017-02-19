@@ -75,10 +75,10 @@
             var num = parseInt(($('#no-cities').text()));
             for(var i = 1; i<num+1; i+=1) {
                 var city = capitalizeFirstLetter($('#city-'+i).val());
-                if(city === 'USA' || city === 'US' || city === 'us' || city === 'Us') {
-                    city = 'United States';
-                }
                 var country = capitalizeFirstLetter($('#country-'+i).val());
+                if(country === 'USA' || country === 'US' || country === 'us' || country === 'Us' || country === 'usa') {
+                    country = 'United States';
+                }
                 var days = parseInt(($('#selector-'+i).val()));
 
                 var code;
