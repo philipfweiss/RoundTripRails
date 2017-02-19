@@ -1,20 +1,36 @@
 <% provide(:title, 'Home') %>
 
 <div class="center jumbotron">
-    <h3> Welcome to Secret Shlomo! </h3>
-    <h2>
-            <span> How many players would you like to have? (2-60) </span>
-            <br>
-            <br>
+    <h3> Welcome to AlgoTripFinder! </h3>
+        <p> AlgoTripFinder helps you plan the perfect multi-destination trip. <br></p>
+
             <span class="input-group">
                   <span class="input-group-btn">
                     <button class="btn btn-secondary" type="button">Go!</button>
                   </span>
-                <input type="text" class="form-control" placeholder="# of players">
+                <input type="text" class="form-control" placeholder="# of cities">
             </span>
 
+       <ol class="title-list">
+           <br>
+           <ul style="margin-left: -65px;">Steps:</ul>
+           <li>
+               Enter the number of cities that you would like to visit.
+           </li>
+           <li>
+               Enter the cities, and the number of days you would like to stay in that city.
+           </li>
+           <li>
+               AlgoTripFinder then computes the cheapest set of flights fitting your specifications.
+           </li>
+           <li>
+               AlgoTripFinder will then give you links to the flights you should book.
+           </li>
+           <li>
+               Enjoy!
+           </li>
 
+       </ol>
+        </p>
 
-    </h2>
-  <!--<%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>-->
 </div>

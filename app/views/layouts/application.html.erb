@@ -9,13 +9,18 @@
 </head>
 <body>
     <%= render 'layouts/header' %>
-    <div class="container">
-          <% flash.each do |message_type, message| %>
-              <div class="alert alert-<%= message_type %>"><%= message %></div>
-          <% end %>
-          <%= yield %>
-          <%= render 'layouts/footer' %>
-    </div>
+    <div class="myoverlay" id="particles-js">
+        </div>
+          <div class="container" style="padding-top: 70px; position: relative; z-index: 0;">
+              <% flash.each do |message_type, message| %>
+                  <div class="alert alert-<%= message_type %>"><%= message %></div>
+              <% end %>
+              <%= yield %>
+
+              <%= render 'layouts/footer' %>
+          </div>
+
 
 </body>
+
 </html>
