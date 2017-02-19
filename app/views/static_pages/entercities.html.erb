@@ -1,0 +1,108 @@
+<div class="jumbotron">
+            <span class="container">
+                    <span id="no-cities" style="display: none"><%= @id %></span>
+                    <%= render 'shared/error_messages' %>
+                    <span class="col-md-5">
+                        <br>
+                        <% @id.times do |city|%>
+                            <label for="city-<%= city+1 %>">
+                                <%= (city+1 == 1) ? 'Start: ' : '' %>City #<%= city+1 %>
+                            </label>
+                            <input id="city-<%= city+1 %>" style="width: 100%" class="form-control">
+
+
+                        <% end %>
+                    </span>
+                    <span class="col-md-5">
+                        <br>
+                            <% @id.times do |city|%>
+                            <label for="country-<%= city+1 %>">
+                                Country #<%= city+1 %>
+                            </label>
+                            <input id="country-<%= city+1 %>" style="width: 100%" class="form-control">
+
+
+                        <% end %>
+                    </span>
+                    <span class="col-md-2">
+                        <% @id.times do |city|%>
+                            <label for="selector-<%=city+1%>">
+                                No. Days: #<%=city+1 %>
+                            </label>
+                            <select id="selector-<%=city+1%>" style="margin-bottom: 14px;" class="form-control">
+                                <%= 50.times do |num| %>
+                                <option value='<%= num+1%>'><%= num+1 %></option>
+                            <% end %>
+                            </select>
+                            <!--<input id="<%= city+1 %>" class="form-control" style="width: 100%" name="comments"><br>-->
+
+                        <% end %>
+
+                    </span>
+            </span>
+
+            <label for="start-date">
+               Start Date
+            </label>
+            <select id="start-date" style="margin-bottom: 14px;" class="form-control">
+                <% 50.times do |x|%>
+                <option><%= (DateTime.now + x.days).strftime('%a %d %b %Y') %></option>
+                <% end %>
+            </select>
+
+    <button id="go-button" style="width: 100%" class="btn btn-success btn-primary" type="button">Go!</button>
+
+</div>
+<%= javascript_include_tag "cities" %>
+<script>
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    var addDays = function(date, days) {
+        date.setDate(date.getDate() + days); 
+        return date;
+    };
+
+    $(document).ready(function() {
+        $('#go-button').on('click', function() {
+            var cities = {
+                start : '',
+                dests : [],
+                startDate : addDays(new Date(),2)
+            };
+            var num = parseInt(($('#no-cities').text()));
+            for(var i = 1; i<num+1; i+=1) {
+                var city = capitalizeFirstLetter($('#city-'+i).val());
+                var country = capitalizeFirstLetter($('#country-'+i).val());
+                var days = parseInt(($('#selector-'+i).val()));
+
+                var code;
+                var found = false;
+                for (var obj in citycodes) {
+                    if (citycodes.hasOwnProperty(obj)) {
+                        if(city === (citycodes[obj].city) && country === citycodes[obj].country){
+                            code = citycodes[obj].iata;
+                            cities.dests.push([code,days]);
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+                if(!found) {
+                    console.log(cities.dests);
+                    alert("Please re-enter your city names");
+                    return;
+                } else {
+                    if(i===1) {
+                        cities.start = code;
+                    }
+
+                }
+            }
+            window.cities = cities;
+            console.log(window.cities);
+        })
+    });
+</script>
+

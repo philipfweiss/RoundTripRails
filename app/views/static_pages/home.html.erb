@@ -1,14 +1,14 @@
 <% provide(:title, 'Home') %>
 
 <div class="center jumbotron">
-    <h3> Welcome to AlgoTripFinder! </h3>
-        <p> AlgoTripFinder helps you plan the perfect multi-destination trip. <br></p>
+    <h3> Welcome to AlgoTripPlanner! </h3>
+        <p> AlgoTripPlanner helps you plan the perfect multi-destination trip. <br></p>
 
             <span class="input-group">
                   <span class="input-group-btn">
-                    <button class="btn btn-secondary" type="button">Go!</button>
+                    <button id="go-button" class="btn btn-secondary" type="button">Go!</button>
                   </span>
-                <input type="text" class="form-control" placeholder="# of cities">
+                <input id="my-input" type="text" class="form-control" placeholder="# Enter a number 1-15">
             </span>
 
        <ol class="title-list">
@@ -21,10 +21,10 @@
                Enter the cities, and the number of days you would like to stay in that city.
            </li>
            <li>
-               AlgoTripFinder then computes the cheapest set of flights fitting your specifications.
+               AlgoTripPlanner then computes the cheapest set of flights fitting your specifications.
            </li>
            <li>
-               AlgoTripFinder will then give you links to the flights you should book.
+               AlgoTripPlanner will then give you links to the flights you should book.
            </li>
            <li>
                Enjoy!
@@ -34,3 +34,16 @@
         </p>
 
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('#go-button').on('click', function() {
+            var val = parseInt(($('#my-input')).val());
+            if(isNaN(val) || val < 1 || val > 15) {
+                alert("Please enter a number between 1 and 15");
+            } else {
+                window.location.replace("/cities/" + val);
+            }
+        })
+    })
+</script>

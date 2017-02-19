@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'signup' => 'users#new'
   get 'login' => 'sessions#new'
   get 'index' => 'users'
+  get 'cities/:id' => 'static_pages#entercities'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
