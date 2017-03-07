@@ -10,6 +10,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'will_paginate'
 gem 'responders'
+gem 'skyscanner'
 gem 'bootstrap-will_paginate'
 gem 'jbuilder'
 gem 'web-console', group: :development

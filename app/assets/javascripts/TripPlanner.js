@@ -49,12 +49,23 @@ var computeBestRoute = function(json) {
             throw "getFlightFare input date must be after today's date!"
         }
 
+        var addDays = function(date, days) {
+            var new_date = new Date(date);
+            new_date.setDate(date.getDate() + days);
+            return new_date;
+        };
+
         // Make the HTTP request to get the JSON data
 
-        var next_date = apiDate(addDays(dep_date, 2));
+        var new_date = dep_date;
+        var next_date = apiDate(addDays(new_date, 2));
         dep_date = apiDate(dep_date);
 
+        console.log(next_date);
+        console.log(dep_date);
+
         var url = 'https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey='+key+'&origin='+source+'&destination='+dest+'&departure_date='+dep_date+'--'+next_date+'&nonstop=false&number_of_results=' + num_results;
+        console.log(url);
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.open( "GET", url, false ); // false for synchronous request
         xmlHttp.send( null );
@@ -101,7 +112,7 @@ var computeBestRoute = function(json) {
         var cheapest_dest;
         for(var i = 0; i<json.dests.length; i++) {
             if(typeof(json.dests[i]) != 'undefined') {
-                var cur_flight = getCheapestFlight(APIKey, startLoc, json.dests[i][0], curDate, 5);
+                var cur_flight = getCheapestFlight(APIKey, startLoc, json.dests[i][0], curDate, 10);
                 if(cur_flight.fare.total_price < cheapest_edge_price) {
                     cheapest_edge_price = cur_flight.fare.total_price;
                     cheapest_edge = cur_flight;
